@@ -9,6 +9,14 @@ public class Product {
     private String productId;
     private String productName;
     private double unitCost;
+    private int qty;
+
+    public Product(String productId, String productName, double unitCost, int qty) {
+        this.productId = productId;
+        this.productName = productName;
+        this.unitCost = unitCost;
+        this.qty = qty;
+    }
 
     public String getProductId() {
         return productId;

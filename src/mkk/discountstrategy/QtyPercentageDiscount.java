@@ -4,11 +4,11 @@ package mkk.discountstrategy;
  *
  * @author Mary
  */
-public class QtyPercentagetDiscount implements DiscountStrategy {
+public class QtyPercentageDiscount implements DiscountStrategy {
     private double discountPct = .10;
     private int minQty = 3;
 
-    public QtyPercentagetDiscount(int minQty) {
+    public QtyPercentageDiscount(int minQty) {
         this.minQty = minQty;
     }
     
@@ -38,7 +38,7 @@ public class QtyPercentagetDiscount implements DiscountStrategy {
     }
     
     public static void main(String[] args) {
-        QtyPercentagetDiscount qpDisc = new QtyPercentagetDiscount(2);
+        QtyPercentageDiscount qpDisc = new QtyPercentageDiscount(2);
         double myDisc = qpDisc.getDiscount(10.00, 1);
         System.out.println(myDisc);
     }

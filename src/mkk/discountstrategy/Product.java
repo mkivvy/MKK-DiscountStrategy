@@ -27,6 +27,9 @@ public class Product {
         this.qty = qty;
     }
 
+    public double getDiscount() {
+        return discStrategy.getDiscount(unitCost, qty);
+    }
     public String getProductId() {
         return productId;
     }
@@ -53,8 +56,8 @@ public class Product {
     
     public static void main(String[] args) {
         Product prod = new Product("2468", "Athletic socks", 5.00, 
-                new FlatAmtDiscount(), 2);
-        double discount = prod.discStrategy.getDiscount(5.00, 2);
+                new FlatPercentageDiscount(), 4);
+        double discount = prod.getDiscount();
         System.out.println(discount);
     }
 }

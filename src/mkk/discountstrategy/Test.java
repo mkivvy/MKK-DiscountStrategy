@@ -7,7 +7,7 @@ package mkk.discountstrategy;
 public class Test {
 
     public static void main(String[] args) {
-        DiscountStrategy disc1 = new QtyPercentagetDiscount(2);
+        DiscountStrategy disc1 = new QtyPercentageDiscount(2);
         double myDisc1 = disc1.getDiscount(10, 1);
         System.out.println(myDisc1);
 

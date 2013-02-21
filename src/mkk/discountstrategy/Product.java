@@ -24,12 +24,17 @@ public class Product {
     public Product(String productId, int qty) {
         this.productId = productId;
         //use the productId to obtain the other product info from fake database
+        //for now, hard code values to pass to setters:
+        setProductName("Silver hoop earrings");
+        setUnitCost(10.00);
+        setDiscStrategy(new FlatPercentageDiscount());
         this.qty = qty;
     }
 
     public double getDiscount() {
         return discStrategy.getDiscount(unitCost, qty);
     }
+    
     public String getProductId() {
         return productId;
     }
@@ -52,6 +57,14 @@ public class Product {
 
     public void setUnitCost(double unitCost) {
         this.unitCost = unitCost;
+    }
+
+    public DiscountStrategy getDiscStrategy() {
+        return discStrategy;
+    }
+
+    public void setDiscStrategy(DiscountStrategy discStrategy) {
+        this.discStrategy = discStrategy;
     }
     
     public static void main(String[] args) {

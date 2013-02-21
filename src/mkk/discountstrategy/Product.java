@@ -9,12 +9,21 @@ public class Product {
     private String productId;
     private String productName;
     private double unitCost;
+    private DiscountStrategy discStrategy;
     private int qty;
 
-    public Product(String productId, String productName, double unitCost, int qty) {
+    public Product(String productId, String productName, double unitCost, 
+            DiscountStrategy discStrategy, int qty) {
         this.productId = productId;
         this.productName = productName;
         this.unitCost = unitCost;
+        this.discStrategy = discStrategy;
+        this.qty = qty;
+    }
+
+    public Product(String productId, int qty) {
+        this.productId = productId;
+        //use the productId to obtain the other product info from fake database
         this.qty = qty;
     }
 
@@ -42,5 +51,10 @@ public class Product {
         this.unitCost = unitCost;
     }
     
-
+    public static void main(String[] args) {
+        Product prod = new Product("2468", "Athletic socks", 5.00, 
+                new FlatAmtDiscount(), 2);
+        double discount = prod.discStrategy.getDiscount(5.00, 2);
+        System.out.println(discount);
+    }
 }

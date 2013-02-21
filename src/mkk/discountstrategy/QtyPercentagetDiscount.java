@@ -39,7 +39,7 @@ public class QtyPercentagetDiscount implements DiscountStrategy {
     
     public static void main(String[] args) {
         QtyPercentagetDiscount qpDisc = new QtyPercentagetDiscount(2);
-        double myDisc = qpDisc.getDiscount(10, 1);
+        double myDisc = qpDisc.getDiscount(10.00, 1);
         System.out.println(myDisc);
     }
 }

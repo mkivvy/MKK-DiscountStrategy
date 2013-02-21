@@ -23,7 +23,7 @@ public class FlatPercentageDiscount implements DiscountStrategy {
 
     public static void main(String[] args) {
         FlatPercentageDiscount flatPctDisc = new FlatPercentageDiscount();
-        double myDisc = flatPctDisc.getDiscount(20, 5);
+        double myDisc = flatPctDisc.getDiscount(20.00, 5);
         System.out.println(myDisc);
     }
 }

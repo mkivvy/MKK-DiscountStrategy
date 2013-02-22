@@ -6,7 +6,7 @@ package mkk.discountstrategy;
  */
 public class FlatAmtDiscount implements DiscountStrategy {
 
-    private double discountAmt = 5.00;
+    private double discountAmt = 2.00;
 
     @Override
     public double getDiscount(double unitCost, int qty) {

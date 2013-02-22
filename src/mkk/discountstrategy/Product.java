@@ -14,7 +14,6 @@ public class Product {
 
     public Product(String productId, String productName, double unitCost, 
             DiscountStrategy discStrategy, int qty) {
-        
         setProductId(productId);
         setProductName(productName);
         setUnitCost(unitCost);
@@ -30,6 +29,14 @@ public class Product {
         setUnitCost(10.00);
         setDiscStrategy(new FlatPercentageDiscount());
         setQty(qty);
+    }
+
+    public Product(String productId, String productName, double unitCost, 
+            DiscountStrategy discStrategy) {
+        setProductId(productId);
+        setProductName(productName);
+        setUnitCost(unitCost);
+        setDiscStrategy(discStrategy);
     }
 
     public final double getDiscount() {

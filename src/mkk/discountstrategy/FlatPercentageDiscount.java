@@ -10,6 +10,9 @@ public class FlatPercentageDiscount implements DiscountStrategy {
 
     @Override
     public double getDiscount(double unitCost, int qty) {
+        if (qty < 0 || unitCost < 0.0) {
+            return 0.0;
+        }
         return unitCost * qty * discountPct;
     }
 
@@ -18,7 +21,11 @@ public class FlatPercentageDiscount implements DiscountStrategy {
     }
 
     public void setDiscountPct(double discountPct) {
-        this.discountPct = discountPct;
+        if (discountPct < 0.0) {
+            this.discountPct = 0.0;
+        } else {
+            this.discountPct = discountPct;
+        }
     }
 
     public static void main(String[] args) {

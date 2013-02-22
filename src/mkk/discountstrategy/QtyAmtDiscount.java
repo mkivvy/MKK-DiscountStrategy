@@ -9,11 +9,18 @@ public class QtyAmtDiscount implements DiscountStrategy {
     private int minQty = 2;
 
     public QtyAmtDiscount(int minQty) {
-        this.minQty = minQty;
+        if (minQty < 1) {
+            this.minQty = 1;
+        } else {
+            this.minQty = minQty;
+        }
     }
 
     @Override
     public double getDiscount (double unitCost, int qty) {
+        if (qty < 0 || unitCost < 0.0) {
+            return 0.0;
+        }
         if (qty >= minQty){
             return (qty/minQty) * discountAmt;
         } else {
@@ -21,12 +28,16 @@ public class QtyAmtDiscount implements DiscountStrategy {
         }
     }
 
-    public double getDisccountAmt() {
+    public double getDiscountAmt() {
         return discountAmt;
     }
 
-    public void setDisccountAmt(double disccountAmt) {
-        this.discountAmt = disccountAmt;
+    public void setDiscountAmt(double discountAmt) {
+        if (discountAmt < 0.0) {
+            this.discountAmt = 0.0;
+        } else {
+            this.discountAmt = discountAmt;
+        }
     }
 
     public int getMinQty() {
@@ -34,7 +45,11 @@ public class QtyAmtDiscount implements DiscountStrategy {
     }
 
     public void setMinQty(int minQty) {
-        this.minQty = minQty;
+        if (minQty < 1) {
+            this.minQty = 1;
+        } else {
+            this.minQty = minQty;
+        }
     }
     
     public static void main(String[] args) {

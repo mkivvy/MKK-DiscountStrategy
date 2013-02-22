@@ -18,7 +18,11 @@ public class FlatAmtDiscount implements DiscountStrategy {
     }
 
     public void setDiscountAmt(double discountAmt) {
-        this.discountAmt = discountAmt;
+        if (discountAmt < 0.0) {
+            this.discountAmt = 0.0;
+        } else {
+            this.discountAmt = discountAmt;
+        }
     }
 
     public static void main(String[] args) {

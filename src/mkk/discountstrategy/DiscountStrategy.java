@@ -10,6 +10,6 @@ package mkk.discountstrategy;
  */
 public interface DiscountStrategy {
 
-    double getDiscount(double unitCost, int qty);
+    public abstract double getDiscount(double unitCost, int qty);
     
 }

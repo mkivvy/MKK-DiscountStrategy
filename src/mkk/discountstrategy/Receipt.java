@@ -6,7 +6,7 @@ package mkk.discountstrategy;
  */
 public class Receipt {
     private LineItem[] lineItems;
-//  private Customer customer;
+    private Customer customer;
     
     
 }

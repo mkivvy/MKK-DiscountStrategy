@@ -67,7 +67,7 @@ public class LineItem {
     }
     
     public static void main(String[] args) {
-        LineItem lineItem = new LineItem("1357", 5, false);
+        LineItem lineItem = new LineItem("F6789", 2, false);
         System.out.println(lineItem.getFormattedLineHeader());
         System.out.println(lineItem.getFormattedLine());
     }

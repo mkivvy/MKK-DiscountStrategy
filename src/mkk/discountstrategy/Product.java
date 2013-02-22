@@ -14,57 +14,92 @@ public class Product {
 
     public Product(String productId, String productName, double unitCost, 
             DiscountStrategy discStrategy, int qty) {
-        this.productId = productId;
-        this.productName = productName;
-        this.unitCost = unitCost;
-        this.discStrategy = discStrategy;
-        this.qty = qty;
+        
+        setProductId(productId);
+        setProductName(productName);
+        setUnitCost(unitCost);
+        setDiscStrategy(discStrategy);
+        setQty(qty);
     }
 
     public Product(String productId, int qty) {
-        this.productId = productId;
+        setProductId(productId);
         //use the productId to obtain the other product info from fake database
         //for now, hard code values to pass to setters:
         setProductName("Silver hoop earrings");
         setUnitCost(10.00);
         setDiscStrategy(new FlatPercentageDiscount());
-        this.qty = qty;
+        setQty(qty);
     }
 
-    public double getDiscount() {
+    public final double getDiscount() {
         return discStrategy.getDiscount(unitCost, qty);
     }
     
-    public String getProductId() {
+    public final String getProductId() {
         return productId;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public final void setProductId(String productId) {
+        if (productId == null) {
+            throw new NullPointerException();
+        } else if (productId.length() == 0){
+            throw new IllegalArgumentException();
+        } else {
+            this.productId = productId;
+        }
     }
 
-    public String getProductName() {
+    public final String getProductName() {
         return productName;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public final void setProductName(String productName) {
+        if (productName == null) {
+            throw new NullPointerException();
+        } else if (productName.length() == 0){
+            throw new IllegalArgumentException();
+        } else {
+            this.productName = productName;
+        }
     }
 
-    public double getUnitCost() {
+    public final double getUnitCost() {
         return unitCost;
     }
 
-    public void setUnitCost(double unitCost) {
-        this.unitCost = unitCost;
+    public final void setUnitCost(double unitCost) {
+        if (unitCost < 0.0) {
+            this.unitCost = 0.0;
+        } else {
+            this.unitCost = unitCost;
+        }
     }
 
-    public DiscountStrategy getDiscStrategy() {
+    public final DiscountStrategy getDiscStrategy() {
         return discStrategy;
     }
 
-    public void setDiscStrategy(DiscountStrategy discStrategy) {
-        this.discStrategy = discStrategy;
+    public final void setDiscStrategy(DiscountStrategy discStrategy) {
+        if (discStrategy == null) {
+            throw new NullPointerException();
+        } else if (!(discStrategy instanceof DiscountStrategy)) {
+            throw new IllegalArgumentException();
+        } else {
+            this.discStrategy = discStrategy;
+        }
+    }
+
+    public final int getQty() {
+        return qty;
+    }
+
+    public final void setQty(int qty) {
+        if (qty < 0) {
+            this.qty = 0;
+        } else {
+            this.qty = qty;
+        }
     }
     
     public static void main(String[] args) {

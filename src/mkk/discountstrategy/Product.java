@@ -23,12 +23,21 @@ public class Product {
 
     public Product(String productId, int qty) {
         setProductId(productId);
+        Product product = getProductInfo(productId);
+        if (product == null) {
+            throw new NullPointerException();
+        }
+        setProductId(product.productId);
+        setProductName(product.productName);
+        setUnitCost(product.unitCost);
+        setDiscStrategy(product.discStrategy);
+        setQty(qty);
+        
         //use the productId to obtain the other product info from fake database
         //for now, hard code values to pass to setters:
-        setProductName("Silver hoop earrings");
-        setUnitCost(10.00);
-        setDiscStrategy(new FlatPercentageDiscount());
-        setQty(qty);
+//        setProductName("Silver hoop earrings");
+//        setUnitCost(10.00);
+//        setDiscStrategy(new FlatPercentageDiscount());
     }
 
     public Product(String productId, String productName, double unitCost, 
@@ -41,6 +50,12 @@ public class Product {
 
     public final double getDiscount() {
         return discStrategy.getDiscount(unitCost, qty);
+    }
+    
+    private Product getProductInfo(String prodId) {
+        FakeDatabase db = new FakeDatabase();
+        Product product = db.findProduct(prodId);
+        return product;
     }
     
     public final String getProductId() {
@@ -110,8 +125,11 @@ public class Product {
     }
     
     public static void main(String[] args) {
-        Product prod = new Product("2468", "Athletic socks", 5.00, 
-                new FlatPercentageDiscount(), 4);
+        Product prod = new Product("A1234", 4);
+        System.out.println(prod.getProductId());
+        System.out.println(prod.getProductName());
+        System.out.println(prod.getUnitCost());
+        System.out.println(prod.discStrategy);
         double discount = prod.getDiscount();
         System.out.println(discount);
     }

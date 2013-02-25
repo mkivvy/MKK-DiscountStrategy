@@ -17,26 +17,39 @@ public class LineItem {
         this.issueGiftReceipt = issueGiftReceipt;
     }
 
-    public double getDiscount() {
+    public LineItem(String prodId, int qty) {
+        product = new Product(prodId, qty);
+        setQty(qty);
+    }
+
+    public final double getDiscount() {
         return product.getDiscount();
     }
     
-    public String getFormattedLine() {
+    public final double getActualCost() {
+        return (product.getUnitCost() * qty) - product.getDiscount();
+    }
+
+    public final double getExtendedCost() {
+        return product.getUnitCost() * qty;
+    }
+
+    public final String getFormattedLine() {
         DecimalFormat dollar = new DecimalFormat("#,##0.00");
         double unitCost = product.getUnitCost();
         double extendedCost = unitCost * qty;
         double discount = product.getDiscount();
-        double cost = extendedCost-discount;
+        double actualCost = extendedCost-discount;
         return product.getProductId() 
                 + "\t" + product.getProductName()
                 + "\t" + qty 
                 + "\t" + dollar.format(unitCost) 
                 + "\t" + dollar.format(extendedCost)
                 + "\t" + dollar.format(discount) 
-                + "\t$" + dollar.format(cost);
+                + "\t$" + dollar.format(actualCost);
     }
 
-    public String getFormattedLineHeader() {
+    public final String getFormattedLineHeader() {
         return "Id" 
                 + "\tName"
                 + "\t\t\tQty"

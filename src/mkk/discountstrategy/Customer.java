@@ -40,7 +40,8 @@ public class Customer {
     }
     
     private Customer getCustomerInfo(String custId) {
-        FakeDatabase db = new FakeDatabase();
+        //this can have a data retrieval strategy
+        FakeCustomerDatabase db = new FakeCustomerDatabase();
         Customer customer = db.findCustomer(custId);
         return customer;
     }

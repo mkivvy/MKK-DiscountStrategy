@@ -53,7 +53,8 @@ public class Product {
     }
     
     private Product getProductInfo(String prodId) {
-        FakeDatabase db = new FakeDatabase();
+        //this can have a data retrieval strategy
+        FakeProductDatabase db = new FakeProductDatabase();
         Product product = db.findProduct(prodId);
         return product;
     }

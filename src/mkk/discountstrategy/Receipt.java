@@ -24,8 +24,6 @@ public class Receipt {
         }
 
         lineItems[0] = new LineItem(prodId, qty);
-//        LineItem item = new LineItem(prodId, qty);
-//        addToLineItemArray(item);
 
         if (custId == null) {
             throw new NullPointerException();

@@ -8,9 +8,8 @@ import java.text.DecimalFormat;
  */
 public class Receipt {
 
-    private LineItem[] lineItems;
+    private LineItem[] lineItems = new LineItem[1];
     private Customer customer;
-    private double totalExtendedCost = 0.0;
     private double totalDiscountAmt = 0.0;
     private double totalActualCost = 0.0;
 
@@ -25,6 +24,8 @@ public class Receipt {
         }
 
         lineItems[0] = new LineItem(prodId, qty);
+//        LineItem item = new LineItem(prodId, qty);
+//        addToLineItemArray(item);
 
         if (custId == null) {
             throw new NullPointerException();
@@ -71,14 +72,13 @@ public class Receipt {
         //tax calculation could also be a strategy
         double tax = calculateSalesTax();
         DecimalFormat dollar = new DecimalFormat("#,##0.00");
-        System.out.println("\t\t\tSubtotal\t$" + dollar.format(totalActualCost));
-        System.out.println("\t\t\tSales tax\t$" + dollar.format(tax));
-        System.out.println("\t\t\tTotal\t$" + dollar.format(totalActualCost + tax));
+        System.out.println("\t\t\t\t\t\tSubtotal\t$" + dollar.format(totalActualCost));
+        System.out.println("\t\t\t\t\t\tSales tax\t$" + dollar.format(tax));
+        System.out.println("\t\t\t\t\t\tTotal\t\t$" + dollar.format(totalActualCost + tax));
     }
 
     private void calculateTotals() {
         for (LineItem li : lineItems) {
-            totalExtendedCost += li.getExtendedCost();
             totalDiscountAmt += li.getDiscount();
             totalActualCost += li.getActualCost();
         }
@@ -91,8 +91,8 @@ public class Receipt {
     private void printCustomerMsgLines() {
         DecimalFormat dollar = new DecimalFormat("#,##0.00");
         System.out.println("Thank you for shopping with us today, " 
-                + customer.getCustomerName());
-        System.out.println("You saved " + dollar.format(totalDiscountAmt));
+                + customer.getCustomerName() + "!");
+        System.out.println("You saved $" + dollar.format(totalDiscountAmt) + "!");
     }
     
     public static void main(String[] args) {

@@ -9,11 +9,28 @@ package mkk.discountstrategy;
  * @author Mary
  */
 public class Startup {
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        CashRegister cashRegister = new CashRegister();
+        cashRegister.setCustomerId("400");
+        cashRegister.startSale("C3456", 3);
+        cashRegister.addItemToSale("D4567", 2);
+        cashRegister.addItemToSale("E5678", 1);
+        cashRegister.finalizeSale();
+
+        cashRegister.startSale("G7890", 1);
+        cashRegister.addItemToSale("H8901", 2);
+        cashRegister.setCustomerId("100");
+        cashRegister.finalizeSale();
+
+        cashRegister.startSale("I9012", 1);
+        cashRegister.addItemToSale("G7890", 2);
+        cashRegister.setCustomerId("300");
+        cashRegister.addItemToSale("A1234", 1);
+        cashRegister.addItemToSale("H8901", 6);
+        cashRegister.finalizeSale();
+
+        cashRegister.startSale("B2345", 4);
+        cashRegister.setCustomerId("500");
+        cashRegister.finalizeSale();
     }
 }

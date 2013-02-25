@@ -49,7 +49,16 @@ public class Receipt {
         } else {
             customer = new Customer(custId);
         }
-}
+    }
+    
+    public final String getCustomerId() {
+        if (customer != null) {
+            return customer.getCustomerId();
+        } else {
+            return null;
+        }
+    }
+    
     public final void addLineItem(String prodId, int qty) {
         if (prodId == null) {
             throw new NullPointerException();
@@ -104,7 +113,10 @@ public class Receipt {
     
     private void printCustomerMsgLines() {
         DecimalFormat dollar = new DecimalFormat("#,##0.00");
-        String name = customer.getCustomerName();
+        String name = " ";
+        if (customer != null) {
+            name = customer.getCustomerName();
+        }
         System.out.println("Thank you for shopping with us today, " 
                 + ((name != null) ? name: " ") + "!");
         System.out.println("You saved $" + dollar.format(totalDiscountAmt) + "!");

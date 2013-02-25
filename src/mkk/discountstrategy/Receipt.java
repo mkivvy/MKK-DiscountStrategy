@@ -25,6 +25,23 @@ public class Receipt {
 
         lineItems[0] = new LineItem(prodId, qty);
 
+        setCustomerId(custId);
+    }
+
+    public Receipt(String prodId, int qty) {
+        if (prodId == null) {
+            throw new NullPointerException();
+        } else if (prodId.length() == 0) {
+            throw new IllegalArgumentException();
+        }
+        if (qty < 0) {
+            throw new IllegalArgumentException();
+        }
+
+        lineItems[0] = new LineItem(prodId, qty);
+    }
+
+    public final void setCustomerId(String custId) {
         if (custId == null) {
             throw new NullPointerException();
         } else if (custId.length() == 0) {
@@ -32,8 +49,7 @@ public class Receipt {
         } else {
             customer = new Customer(custId);
         }
-    }
-
+}
     public final void addLineItem(String prodId, int qty) {
         if (prodId == null) {
             throw new NullPointerException();
@@ -88,8 +104,9 @@ public class Receipt {
     
     private void printCustomerMsgLines() {
         DecimalFormat dollar = new DecimalFormat("#,##0.00");
+        String name = customer.getCustomerName();
         System.out.println("Thank you for shopping with us today, " 
-                + customer.getCustomerName() + "!");
+                + ((name != null) ? name: " ") + "!");
         System.out.println("You saved $" + dollar.format(totalDiscountAmt) + "!");
     }
     

@@ -12,12 +12,28 @@ public class LineItem {
     private boolean issueGiftReceipt = false;
 
     public LineItem(String prodId, int qty, boolean issueGiftReceipt) {
+        if (prodId == null) {
+            throw new NullPointerException();
+        } else if (prodId.length() == 0){
+            throw new IllegalArgumentException();
+        }
+        if (qty < 0) {
+            qty = 0;
+        }
         product = new Product(prodId, qty);
         setQty(qty);
         this.issueGiftReceipt = issueGiftReceipt;
     }
 
     public LineItem(String prodId, int qty) {
+        if (prodId == null) {
+            throw new NullPointerException();
+        } else if (prodId.length() == 0){
+            throw new IllegalArgumentException();
+        }
+        if (qty < 0) {
+            qty = 0;
+        }
         product = new Product(prodId, qty);
         setQty(qty);
     }

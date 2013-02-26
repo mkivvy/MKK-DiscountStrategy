@@ -7,7 +7,8 @@ package mkk.discountstrategy;
 public class NoDiscount implements DiscountStrategy {
 
     @Override
-    public double getDiscount(double unitCost, int qty) {
+    public final double getDiscount(double unitCost, int qty) {
+        //no validation needed as parameters are not used
         return 0.0;
     }
 

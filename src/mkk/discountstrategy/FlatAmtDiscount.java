@@ -9,15 +9,16 @@ public class FlatAmtDiscount implements DiscountStrategy {
     private double discountAmt = 2.00;
 
     @Override
-    public double getDiscount(double unitCost, int qty) {
+    public final double getDiscount(double unitCost, int qty) {
+        //no validation needed as parameters are not needed
         return discountAmt;
     }
 
-    public double getDiscountAmt() {
+    public final double getDiscountAmt() {
         return discountAmt;
     }
 
-    public void setDiscountAmt(double discountAmt) {
+    public final void setDiscountAmt(double discountAmt) {
         if (discountAmt < 0.0) {
             this.discountAmt = 0.0;
         } else {

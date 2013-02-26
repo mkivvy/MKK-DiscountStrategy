@@ -41,6 +41,8 @@ public class Customer {
     
     private Customer getCustomerInfo(String custId) {
         //this can have a data retrieval strategy
+        //prodId does not need to be validated here because this is a private
+        //method called only from the constructor which already validates it
         FakeCustomerDatabase db = new FakeCustomerDatabase();
         Customer customer = db.findCustomer(custId);
         return customer;

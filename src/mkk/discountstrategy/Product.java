@@ -52,8 +52,10 @@ public class Product {
         return discStrategy.getDiscount(unitCost, qty);
     }
     
-    private Product getProductInfo(String prodId) {
+    private final Product getProductInfo(String prodId) {
         //this can have a data retrieval strategy
+        //prodId does not need to be validated here because this is a private
+        //method called only from the constructor which already validates it
         FakeProductDatabase db = new FakeProductDatabase();
         Product product = db.findProduct(prodId);
         return product;

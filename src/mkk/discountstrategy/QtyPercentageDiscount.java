@@ -17,7 +17,7 @@ public class QtyPercentageDiscount implements DiscountStrategy {
     }
     
     @Override
-    public double getDiscount (double unitCost, int qty) {
+    public final double getDiscount (double unitCost, int qty) {
         if (qty < 0 || unitCost < 0.0) {
             return 0.0;
         }
@@ -28,11 +28,11 @@ public class QtyPercentageDiscount implements DiscountStrategy {
         }
     }
 
-    public double getDiscountPct() {
+    public final double getDiscountPct() {
         return discountPct;
     }
 
-    public void setDiscountPct(double discountPct) {
+    public final void setDiscountPct(double discountPct) {
         if (discountPct < 0.0) {
             this.discountPct = 0.0;
         } else {
@@ -40,11 +40,11 @@ public class QtyPercentageDiscount implements DiscountStrategy {
         }
     }
 
-    public int getMinQty() {
+    public final int getMinQty() {
         return minQty;
     }
 
-    public void setMinQty(int minQty) {
+    public final void setMinQty(int minQty) {
         if (minQty < 1) {
             this.minQty = 1;
         } else {

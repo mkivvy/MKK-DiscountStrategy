@@ -5,9 +5,11 @@ package mkk.discountstrategy;
  * @author Mary
  */
 public class Customer {
+
     private String customerId;
     private String customerName;
     private double acctBalance = 0.0;
+    private DataRetrievalStrategy dataStrategy = new CustomerFakeDatabaseRetrieval();
 
     public Customer(String customerId, String customerName) {
         setCustomerId(customerId);
@@ -31,23 +33,30 @@ public class Customer {
         setAcctBalance(customer.acctBalance);
     }
 
-    public final void debitAcct(double amt){
+    public final void debitAcct(double amt) {
         acctBalance += amt;
     }
-    
-    public final void creditAcct(double amt){
+
+    public final void creditAcct(double amt) {
         acctBalance -= amt;
     }
-    
+
     private Customer getCustomerInfo(String custId) {
-        //this can have a data retrieval strategy
         //prodId does not need to be validated here because this is a private
         //method called only from the constructor which already validates it
-        FakeCustomerDatabase db = new FakeCustomerDatabase();
-        Customer customer = db.findCustomer(custId);
-        return customer;
+//        FakeCustomerDatabase db = new FakeCustomerDatabase();
+//        Customer customer = db.findCustomer(custId);
+//        return customer;
+        //COOL!!! I am making use of the strategy pattern AND polymorphism!
+        Object obj = dataStrategy.getData(custId);
+        if (obj instanceof Customer) {
+            Customer customer = (Customer) obj;
+            return customer;
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
-    
+
     public final String getCustomerId() {
         return customerId;
     }
@@ -55,7 +64,7 @@ public class Customer {
     public final void setCustomerId(String customerId) {
         if (customerId == null) {
             throw new NullPointerException();
-        } else if (customerId.length() == 0){
+        } else if (customerId.length() == 0) {
             throw new IllegalArgumentException();
         } else {
             this.customerId = customerId;
@@ -69,7 +78,7 @@ public class Customer {
     public final void setCustomerName(String customerName) {
         if (customerName == null) {
             throw new NullPointerException();
-        } else if (customerName.length() == 0){
+        } else if (customerName.length() == 0) {
             throw new IllegalArgumentException();
         } else {
             this.customerName = customerName;
@@ -88,9 +97,17 @@ public class Customer {
         //it's valid
         this.acctBalance = acctBalance;
     }
-    
+
+    public DataRetrievalStrategy getDataStrategy() {
+        return dataStrategy;
+    }
+
+    public void setDataStrategy(DataRetrievalStrategy dataStrategy) {
+        this.dataStrategy = dataStrategy;
+    }
+
     public static void main(String[] args) {
-        Customer cust = new Customer("200");
+        Customer cust = new Customer("500");
         System.out.println(cust.getCustomerId());
         System.out.println(cust.getCustomerName());
         System.out.println(cust.getAcctBalance());
@@ -114,6 +131,6 @@ public class Customer {
 //        System.out.println(cust2.getAcctBalance());
 //        cust2.creditAcct(15.00);
 //        System.out.println(cust1.getAcctBalance());
-        
+
     }
 }

@@ -11,7 +11,7 @@ public class Product {
     private double unitCost;
     private DiscountStrategy discStrategy;
     private int qty;
-    private ProductDataRetrievalStrategy dataStrategy 
+    private DataRetrievalStrategy dataStrategy 
             = new ProductFakeDatabaseRetrieval();
 
     public Product(String productId, String productName, double unitCost, 
@@ -60,8 +60,16 @@ public class Product {
         //method called only from the constructor which already validates it
 //        FakeProductDatabase db = new FakeProductDatabase();
 //        Product product = db.findProduct(prodId);
-        Product product = dataStrategy.getProductInfo(prodId);
-        return product;
+//        Product product = dataStrategy.getProductInfo(prodId);
+        //COOL!!! I am making use of the strategy pattern AND polymorphism!
+        Object obj = dataStrategy.getData(prodId);
+        if (obj instanceof Product) {
+            Product product = (Product) obj;
+            return product;
+        } else {
+            throw new IllegalArgumentException();
+        }
+        
     }
     
     public final String getProductId() {
@@ -118,11 +126,11 @@ public class Product {
         }
     }
 
-    public ProductDataRetrievalStrategy getDataStrategy() {
+    public DataRetrievalStrategy getDataStrategy() {
         return dataStrategy;
     }
 
-    public void setDataStrategy(ProductDataRetrievalStrategy dataStrategy) {
+    public void setDataStrategy(DataRetrievalStrategy dataStrategy) {
         this.dataStrategy = dataStrategy;
     }
 

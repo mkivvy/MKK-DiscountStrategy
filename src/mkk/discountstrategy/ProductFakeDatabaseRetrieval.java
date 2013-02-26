@@ -1,11 +1,11 @@
 package mkk.discountstrategy;
 
-public class ProductFakeDatabaseRetrieval implements ProductDataRetrievalStrategy {
+public class ProductFakeDatabaseRetrieval implements DataRetrievalStrategy {
 
     @Override
-    public Product getProductInfo(String prodId) {
+    public Object getData(String key) {
         FakeProductDatabase db = new FakeProductDatabase();
-        Product product = db.findProduct(prodId);
+        Product product = db.findProduct(key);
         return product;
     }
 }

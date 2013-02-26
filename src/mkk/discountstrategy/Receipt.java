@@ -74,6 +74,9 @@ public class Receipt {
     }
 
     private void addToLineItemArray(LineItem item) {
+        //item does not need to be validated here because this is a private
+        //method that is called only from addLineItem where validation logic
+        //is built into the creation of the line item
         LineItem[] tempItems = new LineItem[lineItems.length + 1];
         System.arraycopy(lineItems, 0, tempItems, 0, lineItems.length);
         tempItems[lineItems.length] = item;

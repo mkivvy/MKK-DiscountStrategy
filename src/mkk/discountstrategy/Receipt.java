@@ -88,6 +88,9 @@ public class Receipt {
         System.out.println(lineItems[0].getFormattedLineHeader());
         for (LineItem li : lineItems) {
             System.out.println(li.getFormattedLine());
+            if (li.isGiftReceipt()){
+                //do gift receipt 
+            }
         }
         printTotals();
         printCustomerMsgLines();
@@ -123,6 +126,7 @@ public class Receipt {
         System.out.println("Thank you for shopping with us today, " 
                 + ((name != null) ? name: " ") + "!");
         System.out.println("You saved $" + dollar.format(totalDiscountAmt) + "!");
+        System.out.println("\n\n");
     }
     
     public static void main(String[] args) {

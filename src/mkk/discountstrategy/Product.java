@@ -11,6 +11,8 @@ public class Product {
     private double unitCost;
     private DiscountStrategy discStrategy;
     private int qty;
+    private ProductDataRetrievalStrategy dataStrategy 
+            = new ProductFakeDatabaseRetrieval();
 
     public Product(String productId, String productName, double unitCost, 
             DiscountStrategy discStrategy, int qty) {
@@ -56,8 +58,9 @@ public class Product {
         //this can have a data retrieval strategy
         //prodId does not need to be validated here because this is a private
         //method called only from the constructor which already validates it
-        FakeProductDatabase db = new FakeProductDatabase();
-        Product product = db.findProduct(prodId);
+//        FakeProductDatabase db = new FakeProductDatabase();
+//        Product product = db.findProduct(prodId);
+        Product product = dataStrategy.getProductInfo(prodId);
         return product;
     }
     
@@ -115,6 +118,14 @@ public class Product {
         }
     }
 
+    public ProductDataRetrievalStrategy getDataStrategy() {
+        return dataStrategy;
+    }
+
+    public void setDataStrategy(ProductDataRetrievalStrategy dataStrategy) {
+        this.dataStrategy = dataStrategy;
+    }
+
     public final int getQty() {
         return qty;
     }
@@ -128,7 +139,7 @@ public class Product {
     }
     
     public static void main(String[] args) {
-        Product prod = new Product("A1234", 4);
+        Product prod = new Product("G7890", 4);
         System.out.println(prod.getProductId());
         System.out.println(prod.getProductName());
         System.out.println(prod.getUnitCost());

@@ -18,7 +18,7 @@ public class Startup {
         cashRegister.finalizeSale();
 
         cashRegister.startSale("G7890", 1);
-        cashRegister.addItemToSale("H8901", 2);
+        cashRegister.addItemToSale("H8901", 1, true);
         cashRegister.setCustomerId("100");
         cashRegister.finalizeSale();
 
@@ -29,7 +29,7 @@ public class Startup {
         cashRegister.addItemToSale("H8901", 6);
         cashRegister.finalizeSale();
 
-        cashRegister.startSale("B2345", 4);
+        cashRegister.startSale("B2345", 4, true);
         cashRegister.setCustomerId("500");
         cashRegister.finalizeSale();
     }

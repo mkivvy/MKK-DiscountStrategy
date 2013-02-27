@@ -12,7 +12,8 @@ public class CashRegister {
     public CashRegister() {
     }
 
-    public CashRegister(String customerId, String productId, int qty) {
+    public CashRegister(String customerId, String productId, int qty, 
+            boolean issueGiftReceipt) {
         if (productId == null) {
             throw new NullPointerException();
         } else if (productId.length() == 0){
@@ -56,6 +57,19 @@ public class CashRegister {
         receipt = new Receipt(productId, qty);
     }
     
+    public final void startSale(String productId, int qty, boolean issueGiftReceipt){
+        if (productId == null) {
+            throw new NullPointerException();
+        } else if (productId.length() == 0){
+            throw new IllegalArgumentException();
+        }
+        if (qty < 0){
+            throw new IllegalArgumentException();
+        }
+        
+        receipt = new Receipt(productId, qty, issueGiftReceipt);
+    }
+    
     public final void setCustomerId(String customerId){
         if (customerId == null) {
             throw new NullPointerException();
@@ -82,7 +96,20 @@ public class CashRegister {
         if (qty < 0){
             throw new IllegalArgumentException();
         }
-        receipt.addLineItem(productId, qty);
+        receipt.addLineItem(productId, qty, false);
+    }
+    
+    public final void addItemToSale(String productId, int qty, 
+            boolean issueGiftReceipt) {
+        if (productId == null) {
+            throw new NullPointerException();
+        } else if (productId.length() == 0){
+            throw new IllegalArgumentException();
+        }
+        if (qty < 0){
+            throw new IllegalArgumentException();
+        }
+        receipt.addLineItem(productId, qty, issueGiftReceipt);
     }
     
     public final void finalizeSale() {

@@ -75,6 +75,10 @@ public class LineItem {
                 + "\tCost";
     }
 
+    public final String getProductId(){
+        return product.getProductId();
+    }
+    
     public final int getQty() {
         return qty;
     }

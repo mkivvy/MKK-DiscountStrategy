@@ -8,6 +8,13 @@ public class FlatPercentageDiscount implements DiscountStrategy {
 
     private double discountPct = .10;
 
+    public FlatPercentageDiscount() {
+    }
+
+    public FlatPercentageDiscount(double discountPct) {
+        setDiscountPct(discountPct);
+    }
+
     @Override
     public final double getDiscount(double unitCost, int qty) {
         if (qty < 0 || unitCost < 0.0) {
@@ -32,5 +39,8 @@ public class FlatPercentageDiscount implements DiscountStrategy {
         FlatPercentageDiscount flatPctDisc = new FlatPercentageDiscount();
         double myDisc = flatPctDisc.getDiscount(20.00, 5);
         System.out.println(myDisc);
+        FlatPercentageDiscount flatPctDisc2 = new FlatPercentageDiscount(.5);
+        double myDisc2 = flatPctDisc2.getDiscount(20.00, 5);
+        System.out.println(myDisc2);
     }
 }

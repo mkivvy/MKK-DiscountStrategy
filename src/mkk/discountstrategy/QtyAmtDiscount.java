@@ -8,12 +8,13 @@ public class QtyAmtDiscount implements DiscountStrategy {
     private double discountAmt = 1.00;
     private int minQty = 2;
 
+    public QtyAmtDiscount(double discountAmt, int minQty) {
+        setDiscountAmt(discountAmt);
+        setMinQty(minQty);
+    }
+
     public QtyAmtDiscount(int minQty) {
-        if (minQty < 1) {
-            this.minQty = 1;
-        } else {
-            this.minQty = minQty;
-        }
+        setMinQty(minQty);
     }
 
     @Override
@@ -54,8 +55,11 @@ public class QtyAmtDiscount implements DiscountStrategy {
     
     public static void main(String[] args) {
         QtyAmtDiscount qaDisc = new QtyAmtDiscount(3);
-        double myDisc = qaDisc.getDiscount(10, 7);
+        double myDisc = qaDisc.getDiscount(10.0, 7);
         System.out.println(myDisc);
+        QtyAmtDiscount qaDisc2 = new QtyAmtDiscount(.5, 3);
+        double myDisc2 = qaDisc2.getDiscount(10.0, 7);
+        System.out.println(myDisc2);
         
     }
 }

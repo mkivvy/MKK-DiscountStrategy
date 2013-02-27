@@ -8,6 +8,13 @@ public class FlatAmtDiscount implements DiscountStrategy {
 
     private double discountAmt = 2.00;
 
+    public FlatAmtDiscount() {
+    }
+
+    public FlatAmtDiscount(double discountAmt) {
+        setDiscountAmt(discountAmt);
+    }
+
     @Override
     public final double getDiscount(double unitCost, int qty) {
         //no validation needed as parameters are not needed
@@ -30,6 +37,9 @@ public class FlatAmtDiscount implements DiscountStrategy {
         FlatAmtDiscount flatAmtDisc = new FlatAmtDiscount();
         double myDisc = flatAmtDisc.getDiscount(25, 7);
         System.out.println(myDisc);
+        FlatAmtDiscount flatAmtDisc2 = new FlatAmtDiscount(5.0);
+        double myDisc2 = flatAmtDisc2.getDiscount(25, 7);
+        System.out.println(myDisc2);
 
     }
 }

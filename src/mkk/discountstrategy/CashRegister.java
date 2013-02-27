@@ -13,7 +13,7 @@ public class CashRegister {
     }
 
     public CashRegister(String customerId, String productId, int qty, 
-            boolean issueGiftReceipt) {
+            boolean issueGiftReceipt, DiscountStrategy discStrategy) {
         if (productId == null) {
             throw new NullPointerException();
         } else if (productId.length() == 0){
@@ -27,8 +27,13 @@ public class CashRegister {
         } else if (customerId.length() == 0) {
             throw new IllegalArgumentException();
         }
-        
-        receipt = new Receipt(productId, qty, customerId);
+        if (discStrategy == null) {
+            throw new NullPointerException();
+        } else if (!(discStrategy instanceof DiscountStrategy)) {
+            throw new IllegalArgumentException();
+        }        
+        receipt = new Receipt(productId, qty, customerId, issueGiftReceipt, 
+                discStrategy);
     }
     
     public CashRegister(String productId, int qty) {
@@ -57,6 +62,24 @@ public class CashRegister {
         receipt = new Receipt(productId, qty);
     }
     
+    public final void startSale(String productId, int qty, String custId){
+        if (productId == null) {
+            throw new NullPointerException();
+        } else if (productId.length() == 0){
+            throw new IllegalArgumentException();
+        }
+        if (qty < 0){
+            throw new IllegalArgumentException();
+        }
+        if (custId == null) {
+            throw new NullPointerException();
+        } else if (custId.length() == 0){
+            throw new IllegalArgumentException();
+        }
+        
+        receipt = new Receipt(productId, qty, custId);
+    }
+    
     public final void startSale(String productId, int qty, boolean issueGiftReceipt){
         if (productId == null) {
             throw new NullPointerException();
@@ -68,6 +91,48 @@ public class CashRegister {
         }
         
         receipt = new Receipt(productId, qty, issueGiftReceipt);
+    }
+    
+    public final void startSale(String productId, int qty,
+            boolean issueGiftReceipt, DiscountStrategy discStrategy){
+        if (productId == null) {
+            throw new NullPointerException();
+        } else if (productId.length() == 0){
+            throw new IllegalArgumentException();
+        }
+        if (qty < 0){
+            throw new IllegalArgumentException();
+        }
+        if (discStrategy == null) {
+            throw new NullPointerException();
+        } else if (!(discStrategy instanceof DiscountStrategy)) {
+            throw new IllegalArgumentException();
+        }        
+        receipt = new Receipt(productId, qty, issueGiftReceipt, discStrategy);
+    }
+    
+    public final void startSale(String productId, int qty, String custId, 
+            boolean issueGiftReceipt, DiscountStrategy discStrategy){
+        if (productId == null) {
+            throw new NullPointerException();
+        } else if (productId.length() == 0){
+            throw new IllegalArgumentException();
+        }
+        if (qty < 0){
+            throw new IllegalArgumentException();
+        }
+        if (custId == null) {
+            throw new NullPointerException();
+        } else if (custId.length() == 0){
+            throw new IllegalArgumentException();
+        }
+        if (discStrategy == null) {
+            throw new NullPointerException();
+        } else if (!(discStrategy instanceof DiscountStrategy)) {
+            throw new IllegalArgumentException();
+        }        
+        receipt = new Receipt(productId, qty, custId, issueGiftReceipt,
+                discStrategy);
     }
     
     public final void setCustomerId(String customerId){
@@ -110,6 +175,24 @@ public class CashRegister {
             throw new IllegalArgumentException();
         }
         receipt.addLineItem(productId, qty, issueGiftReceipt);
+    }
+    
+    public final void addItemToSale(String productId, int qty, 
+            boolean issueGiftReceipt, DiscountStrategy discStrategy) {
+        if (productId == null) {
+            throw new NullPointerException();
+        } else if (productId.length() == 0){
+            throw new IllegalArgumentException();
+        }
+        if (qty < 0){
+            throw new IllegalArgumentException();
+        }
+        if (discStrategy == null) {
+            throw new NullPointerException();
+        } else if (!(discStrategy instanceof DiscountStrategy)) {
+            throw new IllegalArgumentException();
+        }        
+        receipt.addLineItem(productId, qty, issueGiftReceipt, discStrategy);
     }
     
     public final void finalizeSale() {

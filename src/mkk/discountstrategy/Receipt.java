@@ -66,6 +66,44 @@ public class Receipt {
         addLineItem(prodId, qty, issueGiftReceipt);
     }
 
+    public Receipt(String prodId, int qty, String custId,
+            boolean issueGiftReceipt, DiscountStrategy discStrategy) {
+        if (prodId == null) {
+            throw new NullPointerException();
+        } else if (prodId.length() == 0) {
+            throw new IllegalArgumentException();
+        }
+        if (qty < 0) {
+            throw new IllegalArgumentException();
+        }
+        if (discStrategy == null) {
+            throw new NullPointerException();
+        } else if (!(discStrategy instanceof DiscountStrategy)) {
+            throw new IllegalArgumentException();
+        }
+        addLineItem(prodId, qty, issueGiftReceipt, discStrategy);
+
+        setCustomerId(custId);
+    }
+
+    public Receipt(String prodId, int qty, boolean issueGiftReceipt,
+            DiscountStrategy discStrategy) {
+        if (prodId == null) {
+            throw new NullPointerException();
+        } else if (prodId.length() == 0) {
+            throw new IllegalArgumentException();
+        }
+        if (qty < 0) {
+            throw new IllegalArgumentException();
+        }
+        if (discStrategy == null) {
+            throw new NullPointerException();
+        } else if (!(discStrategy instanceof DiscountStrategy)) {
+            throw new IllegalArgumentException();
+        }
+        addLineItem(prodId, qty, issueGiftReceipt, discStrategy);
+    }
+
     public final void setCustomerId(String custId) {
         if (custId == null) {
             throw new NullPointerException();
@@ -96,6 +134,25 @@ public class Receipt {
         }
 
         LineItem item = new LineItem(prodId, qty, issueGiftReceipt);
+        addToLineItemArray(item);
+    }
+
+    public final void addLineItem(String prodId, int qty,
+            boolean issueGiftReceipt, DiscountStrategy discStrategy) {
+        if (prodId == null) {
+            throw new NullPointerException();
+        } else if (prodId.length() == 0) {
+            throw new IllegalArgumentException();
+        }
+        if (qty < 0) {
+            throw new IllegalArgumentException();
+        }
+        if (discStrategy == null) {
+            throw new NullPointerException();
+        } else if (!(discStrategy instanceof DiscountStrategy)) {
+            throw new IllegalArgumentException();
+        }
+        LineItem item = new LineItem(prodId, qty, issueGiftReceipt, discStrategy);
         addToLineItemArray(item);
     }
 
@@ -156,7 +213,7 @@ public class Receipt {
     private void printGiftReceipts() {
         for (LineItem li : lineItems) {
             if (li.isGiftReceipt() && (li.getActualCost() > 0.0)) {
-                GiftReceipt gr = new GiftReceipt(li.getProductId(), 
+                GiftReceipt gr = new GiftReceipt(li.getProductId(),
                         li.getActualCost(), li.getQty());
                 gr.produceGiftReceipt();
             }

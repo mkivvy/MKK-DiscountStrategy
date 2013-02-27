@@ -7,6 +7,7 @@ import java.text.DecimalFormat;
  * @author Mary
  */
 public class LineItem {
+
     private Product product;
     private int qty;
     private boolean issueGiftReceipt = false;
@@ -14,7 +15,7 @@ public class LineItem {
     public LineItem(String prodId, int qty, boolean issueGiftReceipt) {
         if (prodId == null) {
             throw new NullPointerException();
-        } else if (prodId.length() == 0){
+        } else if (prodId.length() == 0) {
             throw new IllegalArgumentException();
         }
         if (qty < 0) {
@@ -25,10 +26,26 @@ public class LineItem {
         this.issueGiftReceipt = issueGiftReceipt;
     }
 
+    public LineItem(String prodId, int qty, boolean issueGiftReceipt,
+            DiscountStrategy discStrategy) {
+        if (prodId == null) {
+            throw new NullPointerException();
+        } else if (prodId.length() == 0) {
+            throw new IllegalArgumentException();
+        }
+        if (qty < 0) {
+            qty = 0;
+        }
+        product = new Product(prodId, qty);
+        setQty(qty);
+        this.issueGiftReceipt = issueGiftReceipt;
+        setDiscStrategy(discStrategy);
+    }
+
     public LineItem(String prodId, int qty) {
         if (prodId == null) {
             throw new NullPointerException();
-        } else if (prodId.length() == 0){
+        } else if (prodId.length() == 0) {
             throw new IllegalArgumentException();
         }
         if (qty < 0) {
@@ -41,7 +58,7 @@ public class LineItem {
     public final double getDiscount() {
         return product.getDiscount();
     }
-    
+
     public final double getActualCost() {
         return (product.getUnitCost() * qty) - product.getDiscount();
     }
@@ -55,30 +72,39 @@ public class LineItem {
         double unitCost = product.getUnitCost();
         double extendedCost = unitCost * qty;
         double discount = product.getDiscount();
-        double actualCost = extendedCost-discount;
-        return product.getProductId() 
+        double actualCost = extendedCost - discount;
+        return product.getProductId()
                 + "\t" + product.getProductName()
-                + "\t" + qty 
-                + "\t" + dollar.format(unitCost) 
+                + "\t" + qty
+                + "\t" + dollar.format(unitCost)
                 + "\t" + dollar.format(extendedCost)
-                + "\t" + dollar.format(discount) 
+                + "\t" + dollar.format(discount)
                 + "\t$" + dollar.format(actualCost);
     }
 
     public final String getFormattedLineHeader() {
-        return "Id" 
+        return "Id"
                 + "\tName"
                 + "\t\t\tQty"
-                + "\tUnit" 
+                + "\tUnit"
                 + "\tExtCost"
                 + "\tDisc"
                 + "\tCost";
     }
 
-    public final String getProductId(){
+    public final String getProductId() {
         return product.getProductId();
     }
-    
+
+    public final void setDiscStrategy(DiscountStrategy discStrategy) {
+        if (discStrategy == null) {
+            throw new NullPointerException();
+        } else if (!(discStrategy instanceof DiscountStrategy)) {
+            throw new IllegalArgumentException();
+        }
+        product.setDiscStrategy(discStrategy);
+    }
+
     public final int getQty() {
         return qty;
     }
@@ -98,7 +124,7 @@ public class LineItem {
     public final void setGiftReceipt(boolean issueGiftReceipt) {
         this.issueGiftReceipt = issueGiftReceipt;
     }
-    
+
     public static void main(String[] args) {
         LineItem lineItem = new LineItem("F6789", 2, false);
         System.out.println(lineItem.getFormattedLineHeader());

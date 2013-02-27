@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package mkk.discountstrategy;
 
 /**
@@ -18,7 +14,8 @@ public class Startup {
         cashRegister.finalizeSale();
 
         cashRegister.startSale("G7890", 1);
-        cashRegister.addItemToSale("H8901", 1, true);
+        cashRegister.addItemToSale("H8901", 4, true);
+//        cashRegister.addItemToSale("H8901", 4, true, new QtyPercentageDiscount(2));
         cashRegister.setCustomerId("100");
         cashRegister.finalizeSale();
 
@@ -30,6 +27,7 @@ public class Startup {
         cashRegister.finalizeSale();
 
         cashRegister.startSale("B2345", 4, true);
+//        cashRegister.startSale("B2345", 4, true, new FlatPercentageDiscount());
         cashRegister.setCustomerId("500");
         cashRegister.finalizeSale();
     }

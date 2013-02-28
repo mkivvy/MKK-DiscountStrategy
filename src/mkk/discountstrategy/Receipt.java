@@ -11,7 +11,7 @@ import java.util.Date;
  */
 public class Receipt {
 
-    private static double receiptNum = 0.0;
+    private static double receiptNum = 0.0;  //thanks to Mark V for this idea!
     private LineItem[] lineItems = new LineItem[0];
     private Customer customer;
     private double totalDiscountAmt = 0.0;
@@ -229,20 +229,28 @@ public class Receipt {
     }
 
     private void printReceiptFooter() {
-        System.out.println("\n\n\tMKK SUPERSTORES Store #" + storeNum);
-        String format = "MM/dd/yyyy hh:mm a";
-        SimpleDateFormat sdf = new SimpleDateFormat(format);
-        // Get current date/time and convert to a Date object because
-        // SimpleDateFormat only works with Date objects
+        //Format today's date with weekday, date & time 
+        String fullDateTime = "EEE MM/dd/yyyy hh:mm a";
+        SimpleDateFormat sdf1 = new SimpleDateFormat(fullDateTime);
         Date date = new Date();
         Calendar calendar = Calendar.getInstance();
         date = calendar.getTime();
-        // Now format the date object as a String
-        String formattedDate = sdf.format(date);
-        System.out.println("7 - formatted Date as String: " + formattedDate);
-        System.out.println("\n\n");
-        System.out.println("==================================================="
-                + "===============================");
+        String formattedToday = sdf1.format(date);
+        //Format return by date (today + 90 days) with just weekday and date
+        String dateOnly = "EEE MM/dd/yyyy";
+        SimpleDateFormat sdf2 = new SimpleDateFormat(dateOnly);
+        calendar.add(Calendar.DATE, 90);
+        date = calendar.getTime();
+        String formatted90Days = sdf2.format(date);
+        
+        System.out.println("\n\n\tMKK SUPERSTORES Store #" + storeNum 
+                 + " " + formattedToday);
+        System.out.println("\nReturns or exchanges can only be made with a "
+                + "valid receipt within 90 days \nof the date of purchase. "
+                + "Returns/exchanges must be done on or before\n"
+                + formatted90Days + ".");
+        System.out.println("\n================================================="
+                + "=================================");
 
     }
 

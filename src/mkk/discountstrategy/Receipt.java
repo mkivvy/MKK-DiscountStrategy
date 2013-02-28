@@ -1,6 +1,9 @@
 package mkk.discountstrategy;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -186,13 +189,6 @@ public class Receipt {
         printGiftReceipts();
     }
 
-    private void printReceiptHeader() {
-        DecimalFormat formatter = new DecimalFormat("0000");
-        System.out.println("Receipt#: " + formatter.format(receiptNum));
-        System.out.println("\t\t\t-- MKK SUPERSTORES --\n");
-        System.out.println(lineItems[0].getFormattedLineHeader());
-    }
-
     private void printTotals() {
         calculateTotals();
         //tax calculation could also be a strategy
@@ -225,8 +221,25 @@ public class Receipt {
         System.out.println("You saved $" + dollar.format(totalDiscountAmt) + "!");
     }
 
+    private void printReceiptHeader() {
+        DecimalFormat formatter = new DecimalFormat("0000");
+        System.out.println("Receipt#: " + formatter.format(receiptNum));
+        System.out.println("\t\t\t-- MKK SUPERSTORES --\n");
+        System.out.println(lineItems[0].getFormattedLineHeader());
+    }
+
     private void printReceiptFooter() {
         System.out.println("\n\n\tMKK SUPERSTORES Store #" + storeNum);
+        String format = "MM/dd/yyyy hh:mm a";
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        // Get current date/time and convert to a Date object because
+        // SimpleDateFormat only works with Date objects
+        Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+        date = calendar.getTime();
+        // Now format the date object as a String
+        String formattedDate = sdf.format(date);
+        System.out.println("7 - formatted Date as String: " + formattedDate);
         System.out.println("\n\n");
         System.out.println("==================================================="
                 + "===============================");

@@ -8,10 +8,12 @@ import java.text.DecimalFormat;
  */
 public class Receipt {
 
+    private static double receiptNum = 0.0;
     private LineItem[] lineItems = new LineItem[0];
     private Customer customer;
     private double totalDiscountAmt = 0.0;
     private double totalActualCost = 0.0;
+    private String storeNum = "832252";
 
     public Receipt(String prodId, int qty, String custId) {
         if (prodId == null) {
@@ -25,6 +27,7 @@ public class Receipt {
         addLineItem(prodId, qty, false);
 
         setCustomerId(custId);
+        receiptNum++;
     }
 
     public Receipt(String prodId, int qty) {
@@ -37,6 +40,7 @@ public class Receipt {
             throw new IllegalArgumentException();
         }
         addLineItem(prodId, qty, false);
+        receiptNum++;
     }
 
     public Receipt(String prodId, int qty, String custId,
@@ -52,6 +56,7 @@ public class Receipt {
         addLineItem(prodId, qty, issueGiftReceipt);
 
         setCustomerId(custId);
+        receiptNum++;
     }
 
     public Receipt(String prodId, int qty, boolean issueGiftReceipt) {
@@ -64,6 +69,7 @@ public class Receipt {
             throw new IllegalArgumentException();
         }
         addLineItem(prodId, qty, issueGiftReceipt);
+        receiptNum++;
     }
 
     public Receipt(String prodId, int qty, String custId,
@@ -84,6 +90,7 @@ public class Receipt {
         addLineItem(prodId, qty, issueGiftReceipt, discStrategy);
 
         setCustomerId(custId);
+        receiptNum++;
     }
 
     public Receipt(String prodId, int qty, boolean issueGiftReceipt,
@@ -102,6 +109,7 @@ public class Receipt {
             throw new IllegalArgumentException();
         }
         addLineItem(prodId, qty, issueGiftReceipt, discStrategy);
+        receiptNum++;
     }
 
     public final void setCustomerId(String custId) {
@@ -168,13 +176,21 @@ public class Receipt {
 
     public final void produceReceipt() {
         //this can also have an output strategy
-        System.out.println(lineItems[0].getFormattedLineHeader());
+        printReceiptHeader();
         for (LineItem li : lineItems) {
             System.out.println(li.getFormattedLine());
         }
         printTotals();
         printCustomerMsgLines();
+        printReceiptFooter();
         printGiftReceipts();
+    }
+
+    private void printReceiptHeader() {
+        DecimalFormat formatter = new DecimalFormat("0000");
+        System.out.println("Receipt#: " + formatter.format(receiptNum));
+        System.out.println("\t\t\t-- MKK SUPERSTORES --\n");
+        System.out.println(lineItems[0].getFormattedLineHeader());
     }
 
     private void printTotals() {
@@ -207,7 +223,14 @@ public class Receipt {
         System.out.println("Thank you for shopping with us today, "
                 + ((name != null) ? name : " ") + "!");
         System.out.println("You saved $" + dollar.format(totalDiscountAmt) + "!");
+    }
+
+    private void printReceiptFooter() {
+        System.out.println("\n\n\tMKK SUPERSTORES Store #" + storeNum);
         System.out.println("\n\n");
+        System.out.println("==================================================="
+                + "===============================");
+
     }
 
     private void printGiftReceipts() {
@@ -218,6 +241,19 @@ public class Receipt {
                 gr.produceGiftReceipt();
             }
         }
+    }
+
+    public final String getStoreNum() {
+        return storeNum;
+    }
+
+    public final void setStoreNum(String storeNum) {
+        if (storeNum == null) {
+            throw new NullPointerException();
+        } else if (storeNum.length() == 0) {
+            throw new IllegalArgumentException();
+        }
+        this.storeNum = storeNum;
     }
 
     public static void main(String[] args) {

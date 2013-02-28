@@ -1,11 +1,15 @@
 package mkk.discountstrategy;
 
+import java.text.DecimalFormat;
+
 /**
  *
  * @author Mary
  */
 public class GiftReceipt {
 
+    private static double giftReceiptNum = 0.0;
+    private String storeNum = "832252";
     private Product product;
     private double perItemCost;
     private int qty;
@@ -31,12 +35,20 @@ public class GiftReceipt {
         String codedCost = getCodedCost();
         //1 gift receipt is produced for each of the qty
         for (int i = 0; i < qty; i++) {
+            giftReceiptNum++;
+            printReceiptHeader();
             System.out.println(product.getProductId() + "\t"
                     + product.getProductName() + "\t"
                     + codedCost + "\n\n");
         }
     }
 
+    private void printReceiptHeader() {
+        DecimalFormat formatter = new DecimalFormat("0000");
+        System.out.println("Gift receipt#: " + formatter.format(giftReceiptNum));
+        System.out.println("\t\t\t-- MKK SUPERSTORES --\n");
+    }
+    
     private String getCodedCost() {
         //if this were for real, there would be an algorithim referenced here
         //that takes the actual cost paid that was passed into the constructor
@@ -66,6 +78,19 @@ public class GiftReceipt {
         } else {
             this.qty = qty;
         }
+    }
+
+    public String getStoreNum() {
+        return storeNum;
+    }
+
+    public void setStoreNum(String storeNum) {
+        if (storeNum == null) {
+            throw new NullPointerException();
+        } else if (storeNum.length() == 0) {
+            throw new IllegalArgumentException();
+        }
+        this.storeNum = storeNum;
     }
 
     public static void main(String[] args) {

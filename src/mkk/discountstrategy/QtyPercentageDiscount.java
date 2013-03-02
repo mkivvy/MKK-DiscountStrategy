@@ -71,7 +71,8 @@ public class QtyPercentageDiscount implements DiscountStrategy {
     /**
      * Sets the value of the private variable for discount percent.
      * 
-     * @param discountPct  the discount percentage expressed as a double
+     * @param discountPct  the discount percentage expressed as a double or 
+     *                     zero if a value less than zero is passed in 
      */
     public final void setDiscountPct(double discountPct) {
         if (discountPct < 0.0) {
@@ -95,7 +96,8 @@ public class QtyPercentageDiscount implements DiscountStrategy {
      * Sets the value of the private variable for minimum quantity.
      * 
      * @param minQty  the minimum number of the item to be purchased before the
-     *                discount will be applied
+     *                discount will be applied.  Defaults to 1 if a value less
+     *                than 1 is passed in
      */
     public final void setMinQty(int minQty) {
         if (minQty < 1) {

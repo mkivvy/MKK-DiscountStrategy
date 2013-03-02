@@ -57,7 +57,8 @@ public class FlatPercentageDiscount implements DiscountStrategy {
     /**
      * Sets the value of the private variable for discount percent.
      * 
-     * @param discountPct  the discount percentage expressed as a double
+     * @param discountPct  the discount percentage expressed as a double or
+     *                     zero if less is passed in 
      */
     public final void setDiscountPct(double discountPct) {
         if (discountPct < 0.0) {

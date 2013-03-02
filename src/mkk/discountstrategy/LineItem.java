@@ -3,8 +3,13 @@ package mkk.discountstrategy;
 import java.text.DecimalFormat;
 
 /**
- *
- * @author Mary
+ * LineItem contains an array of initialized Customer objects for use
+ * as test data for the MKK-DiscountStrategy Project.
+ * The method findCustomer is used to search the Customer array for a matching
+ * customer id.
+ * 
+ * @author Mary King, mking@my.wctc.edu
+ * @version 1.0
  */
 public class LineItem {
 

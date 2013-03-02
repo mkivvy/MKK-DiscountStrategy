@@ -1,8 +1,13 @@
 package mkk.discountstrategy;
 
 /**
- *
- * @author Mary
+ * FakeProductDatabase contains an array of initialized Product objects for use
+ * as test data for the MKK-DiscountStrategy Project.
+ * The method findProduct is used to search the Product array for a matching
+ * product id.
+ * 
+ * @author Mary King, mking@my.wctc.edu
+ * @version 1.0
  */
 public class FakeProductDatabase {
     private Product[] products = {
@@ -18,6 +23,17 @@ public class FakeProductDatabase {
             new Product("J0123","Silver hoop earrings",10.00, new QtyPercentageDiscount(2))
     };
     
+    /**
+     * Searches the Product array using the product id passed in to find a 
+     * matching Product.
+     * 
+     * @param prodId  the product id, a unique string identifying the product.
+     *                not null, not empty 
+     * @return  a Product object if a matching product id is found within the
+     *          the array, otherwise null
+     * @throws NullPointerException if product id is null 
+     * @throws  IllegalArgumentException if product id has length of zero
+     */
     public final Product findProduct(String prodId){
         if (prodId == null) {
             throw new NullPointerException();

@@ -1,8 +1,13 @@
 package mkk.discountstrategy;
 
 /**
- *
- * @author Mary
+ * FakeCustomerDatabase contains an array of initialized Customer objects for use
+ * as test data for the MKK-DiscountStrategy Project.
+ * The method findCustomer is used to search the Customer array for a matching
+ * customer id.
+ * 
+ * @author Mary King, mking@my.wctc.edu
+ * @version 1.0
  */
 public class FakeCustomerDatabase {
     private Customer[] customers = {
@@ -13,6 +18,17 @@ public class FakeCustomerDatabase {
             new Customer("500","Michele DeJardin",500.00),
     };
     
+    /**
+     * Searches the Customer array using the customer id passed in to find a 
+     * matching Customer.
+     * 
+     * @param custId  the customer id, a unique string identifying the customer.
+     *                not null, not empty 
+     * @return  a Customer object if a matching customer id is found within the
+     *          the array, otherwise null
+     * @throws NullPointerException if customer id is null 
+     * @throws  IllegalArgumentException if customer id has length of zero
+     */
     public final Customer findCustomer(String custId){
         if (custId == null) {
             throw new NullPointerException();

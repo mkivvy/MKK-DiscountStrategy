@@ -17,7 +17,7 @@ public class ProductFakeDatabaseRetrieval implements DataRetrievalStrategy {
      * @param productId  the product id, a unique string identifying the product.
      *                   not null, not empty 
      * @return  a Product object if a matching product id is found within the
-     *          the FakeProductDatabase, otherwise null
+     *          the FakeProductDatabase, null if not found
      * @throws  NullPointerException if product id is null 
      * @throws  IllegalArgumentException if product id has length of zero
      */

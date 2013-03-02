@@ -25,7 +25,7 @@ public class FakeCustomerDatabase {
      * @param custId  the customer id, a unique string identifying the customer.
      *                not null, not empty 
      * @return  a Customer object if a matching customer id is found within the
-     *          the array, otherwise null
+     *          the array, null if not found
      * @throws NullPointerException if customer id is null 
      * @throws  IllegalArgumentException if customer id has length of zero
      */

@@ -18,7 +18,7 @@ public class CustomerFakeDatabaseRetrieval implements DataRetrievalStrategy {
      * @param customerId the customer id, a unique string identifying the
      * customer. not null, not empty
      * @return a Customer object if a matching customer id is found within the
-     * the FakeCustomerDatabase, otherwise null
+     * the FakeCustomerDatabase, null if not found
      * @throws NullPointerException if customer id is null
      * @throws IllegalArgumentException if customer id has length of zero
      */

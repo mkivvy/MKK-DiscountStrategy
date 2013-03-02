@@ -30,7 +30,7 @@ public class FakeProductDatabase {
      * @param prodId  the product id, a unique string identifying the product.
      *                not null, not empty 
      * @return  a Product object if a matching product id is found within the
-     *          the array, otherwise null
+     *          the array, null if not found
      * @throws NullPointerException if product id is null 
      * @throws  IllegalArgumentException if product id has length of zero
      */

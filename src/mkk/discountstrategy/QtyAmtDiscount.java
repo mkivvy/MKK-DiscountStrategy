@@ -2,7 +2,9 @@ package mkk.discountstrategy;
 
 /**
  *
- * @author Mary
+ * 
+ * @author Mary King, mking@my.wctc.edu
+ * @version 1.0
  */
 public class QtyAmtDiscount implements DiscountStrategy {
     private double discountAmt = 1.00;

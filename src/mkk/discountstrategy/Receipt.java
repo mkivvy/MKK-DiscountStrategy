@@ -6,10 +6,22 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Receipt contains an array of initialized Customer objects for use
- * as test data for the MKK-DiscountStrategy Project.
- * The method findCustomer is used to search the Customer array for a matching
- * customer id.
+ * Receipt is a concrete class containing data and methods related to a customer
+ * receipt in a retail system for the MKK-DiscountStrategy Project.
+ * <p>
+ * Receipt contains an array of LineItem objects which print on the receipt 
+ * displaying the product, quantity, cost, and discount amount for each item purchased.
+ * Header and footer information is also printed on the receipt including a 
+ * total amount the customer saved on this sale.
+ * <p>
+ * Receipt instantiates a Customer object to retrieve customer information for the
+ * receipt footer to display.
+ * <p>
+ * This class also contains a static receipt number which increments for each new
+ * receipt and a store number with a default value.
+ * <p>
+ * Once a receipt is printed, the line items are checked to see if any gift
+ * receipts are needed and instantiates to the GiftReceipt class to print them.
  * 
  * @author Mary King, mking@my.wctc.edu
  * @version 1.0
@@ -23,6 +35,25 @@ public class Receipt {
     private double totalActualCost = 0.0;
     private String storeNum = "832252";
 
+    /**
+     * Constructor instantiates the class using the product id, quantity, issue
+     * gift receipt, and a discount strategy fields to instantiate the first
+     * LineItem for the receipt.
+     * A Customer object is instantiated using the customer id to gather customer
+     * information for the recept.
+     * The issueGiftReceipt defaults to false so no gift receipts are issued.
+     * The static field receipt number is incremented.
+     * 
+     * @param prodId  the product id, a unique string identifying the product.
+     *                not null, not empty
+     * @param qty  the number of the item being purchased, not less than zero
+     * @param custId  the customer id, a unique string identifying the customer
+     * @param issueGiftReceipt  true if a gift receipt is to be issued for the
+     *                          product
+     * @throws  NullPointerException if the productId parameter is null
+     * @throws  IllegalArgumentException if the productId parameter is empty or
+     *          the qty parameter is less than zero
+     */
     public Receipt(String prodId, int qty, String custId) {
         if (prodId == null) {
             throw new NullPointerException();
@@ -38,6 +69,22 @@ public class Receipt {
         receiptNum++;
     }
 
+    /**
+     * Constructor instantiates the class using the product id, quantity, issue
+     * gift receipt, and a discount strategy fields to instantiate the first
+     * LineItem for the receipt.
+     * Customer id would need to be set later in the process in order to display
+     * customer information on the receipt.
+     * The issueGiftReceipt defaults to false so no gift receipts are issued.
+     * The static field receipt number is incremented.
+     * 
+     * @param prodId  the product id, a unique string identifying the product.
+     *                not null, not empty
+     * @param qty  the number of the item being purchased, not less than zero
+     * @throws  NullPointerException if the productIdparameter is null
+     * @throws  IllegalArgumentException if the productId parameter is empty or
+     *          the qty parameter is less than zero
+     */
     public Receipt(String prodId, int qty) {
         if (prodId == null) {
             throw new NullPointerException();
@@ -51,6 +98,24 @@ public class Receipt {
         receiptNum++;
     }
 
+    /**
+     * Constructor instantiates the class using the product id, quantity, issue
+     * gift receipt, and a discount strategy fields to instantiate the first
+     * LineItem for the receipt.
+     * A Customer object is instantiated using the customer id to gather customer
+     * information for the recept.
+     * The static field receipt number is incremented.
+     * 
+     * @param prodId  the product id, a unique string identifying the product.
+     *                not null, not empty
+     * @param qty  the number of the item being purchased, not less than zero
+     * @param custId  the customer id, a unique string identifying the customer
+     * @param issueGiftReceipt  true if a gift receipt is to be issued for the
+     *                          product
+     * @throws  NullPointerException if the productId parameter is null
+     * @throws  IllegalArgumentException if the productId parameter is empty or
+     *          the qty parameter is less than zero
+     */
     public Receipt(String prodId, int qty, String custId,
             boolean issueGiftReceipt) {
         if (prodId == null) {
@@ -67,6 +132,23 @@ public class Receipt {
         receiptNum++;
     }
 
+    /**
+     * Constructor instantiates the class using the product id, quantity, issue
+     * gift receipt, and a discount strategy fields to instantiate the first
+     * LineItem for the receipt.
+     * Customer id would need to be set later in the process in order to display
+     * customer information on the receipt.
+     * The static field receipt number is incremented.
+     * 
+     * @param prodId  the product id, a unique string identifying the product.
+     *                not null, not empty
+     * @param qty  the number of the item being purchased, not less than zero
+     * @param issueGiftReceipt  true if a gift receipt is to be issued for the
+     *                          product
+     * @throws  NullPointerException if the productId parameter is null
+     * @throws  IllegalArgumentException if the productId parameter is empty or
+     *          the qty parameter is less than zero
+     */
     public Receipt(String prodId, int qty, boolean issueGiftReceipt) {
         if (prodId == null) {
             throw new NullPointerException();
@@ -80,6 +162,31 @@ public class Receipt {
         receiptNum++;
     }
 
+    /**
+     * Constructor instantiates the class using the product id, quantity, issue
+     * gift receipt, and a discount strategy fields to instantiate the first
+     * LineItem for the receipt.
+     * Discount strategy is not a required parameter for LineItem; it is only
+     * passed along if the discount strategy is to be set at the time of the sale.
+     * A Customer object is instantiated using the customer id to gather customer
+     * information for the recept.
+     * The static field receipt number is incremented.
+     * 
+     * @param prodId  the product id, a unique string identifying the product.
+     *                not null, not empty
+     * @param qty  the number of the item being purchased, not less than zero
+     * @param custId  the customer id, a unique string identifying the customer
+     * @param issueGiftReceipt  true if a gift receipt is to be issued for the
+     *                          product
+     * @param discStrategy  the discount strategy type of class being used to 
+     *                      calculate the discount for this particular product.
+     *                      not null
+     * @throws  NullPointerException if the productId or the discStrategy 
+     *          parameter is null
+     * @throws  IllegalArgumentException if the productId parameter is empty or
+     *          the qty parameter is less than zero or if the discStrategy
+     *          parameter is is not an instance of a DiscountStrategy type
+     */
     public Receipt(String prodId, int qty, String custId,
             boolean issueGiftReceipt, DiscountStrategy discStrategy) {
         if (prodId == null) {
@@ -101,6 +208,30 @@ public class Receipt {
         receiptNum++;
     }
 
+    /**
+     * Constructor instantiates the class using the product id, quantity, issue
+     * gift receipt, and a discount strategy fields to instantiate the first
+     * LineItem for the receipt.
+     * Discount strategy is not a required parameter for LineItem; it is only
+     * passed along if the discount strategy is to be set at the time of the sale.
+     * Customer id would need to be set later in the process in order to display
+     * customer information on the receipt.
+     * The static field receipt number is incremented.
+     * 
+     * @param prodId  the product id, a unique string identifying the product.
+     *                not null, not empty
+     * @param qty  the number of the item being purchased, not less than zero
+     * @param issueGiftReceipt  true if a gift receipt is to be issued for the
+     *                          product
+     * @param discStrategy  the discount strategy type of class being used to 
+     *                      calculate the discount for this particular product.
+     *                      not null
+     * @throws  NullPointerException if the productId or the discStrategy 
+     *          parameter is null
+     * @throws  IllegalArgumentException if the productId parameter is empty or
+     *          the qty parameter is less than zero or if the discStrategy
+     *          parameter is is not an instance of a DiscountStrategy type
+     */
     public Receipt(String prodId, int qty, boolean issueGiftReceipt,
             DiscountStrategy discStrategy) {
         if (prodId == null) {

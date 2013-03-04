@@ -29,9 +29,11 @@ public class LineItem {
      * 
      * @param prodId  the product id, a unique string identifying the product.
      *                not null, not empty
-     * @param qty  the number of the item being purchased
+     * @param qty  the number of the item being purchased, not less than zero
      * @param issueGiftReceipt  true if a gift receipt is to be issued for the
      *                          product
+     * @throws  NullPointerException if the productId parameter is null
+     * @throws  IllegalArgumentException if the productId parameter is empty
      */
     public LineItem(String prodId, int qty, boolean issueGiftReceipt) {
         if (prodId == null) {
@@ -54,11 +56,13 @@ public class LineItem {
      * 
      * @param prodId  the product id, a unique string identifying the product.
      *                not null, not empty
-     * @param qty  the number of the item being purchased
+     * @param qty  the number of the item being purchased, not less than zero
      * @param issueGiftReceipt  true if a gift receipt is to be issued for the
      *                          product
      * @param discStrategy  the discount strategy type of class being used to 
      *                      calculate the discount for this particular product
+     * @throws  NullPointerException if the productId parameter is null
+     * @throws  IllegalArgumentException if the productId parameter is empty
      */
     public LineItem(String prodId, int qty, boolean issueGiftReceipt,
             DiscountStrategy discStrategy) {
@@ -84,7 +88,9 @@ public class LineItem {
      * 
      * @param prodId  the product id, a unique string identifying the product.
      *                not null, not empty
-     * @param qty  the number of the item being purchased
+     * @param qty  the number of the item being purchased, not less than zero
+     * @throws  NullPointerException if the productId parameter is null
+     * @throws  IllegalArgumentException if the productId parameter is empty
      */
     public LineItem(String prodId, int qty) {
         if (prodId == null) {

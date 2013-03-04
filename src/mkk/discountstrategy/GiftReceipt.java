@@ -6,10 +6,24 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * GiftReceipt contains an array of initialized Customer objects for use
- * as test data for the MKK-DiscountStrategy Project.
- * The method findCustomer is used to search the Customer array for a matching
- * customer id.
+/**
+ * GiftReceipt is a concrete class containing data and methods related to the
+ * generation of customer-requested gift receipts in a retail system for the 
+ * MKK-DiscountStrategy Project.
+ * A gift receipt is generated for a product for each actual item purchased.
+ * In other words, if a customer bought 3 t-shirts then 3 gift receipts are
+ * created.
+ * This class currently does not have the ability to generate fewer gift
+ * receipts than the entire quantity purchased.
+ * <p>
+ * A Product object is instantiated to get needed product information but 
+ * instead of using the unitCost in the Product database, a perItemCost is 
+ * calculated. 
+ * This is because with a discount applied, the perItemCost could differ from
+ * the Product's stored unitCost.
+ * <p>
+ * This class also contains a static gift receipt number which increments for 
+ * each new gift receipt and a store number with a default value.
  * 
  * @author Mary King, mking@my.wctc.edu
  * @version 1.0
@@ -22,9 +36,22 @@ public class GiftReceipt {
     private double perItemCost;
     private int qty;
 
-    //note that the ACTUAL TOTAL COST the customer paid for the entire qty is
-    //what gets passed in here - therefore, per item cost for each reciept is
-    //calculated by dividing cost by qty when cost is set
+    /**
+     * Constructor instantiates the class using the product id, the actual cost
+     * the customer paid for the entire amount of product purchased, and the
+     * quantity of the product purchased.
+     * 
+     * @param productId  the product id, a unique string identifying the product.
+     *                   not null, not empty
+     * @param cost  the ACTUAL COST that the customer paid for the entire product
+     *              quantity.  The per item cost for each receipt is then
+     *              calculated by dividing this cost by the quantity.  The
+     *              unit cost from the Product database is not used because it
+     *              would not include any discount amount.
+     * @param qty  the number of the item being purchased, not less than zero
+     * @throws  NullPointerException if the productId parameter is null
+     * @throws  IllegalArgumentException if the productId parameter is empty
+     */
     public GiftReceipt(String productId, double cost, int qty) {
         if (productId == null) {
             throw new NullPointerException();

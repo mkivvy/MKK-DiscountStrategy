@@ -1,10 +1,10 @@
 package mkk.discountstrategy;
 
 /**
- * Customer contains an array of initialized Customer objects for use
- * as test data for the MKK-DiscountStrategy Project.
- * The method findCustomer is used to search the Customer array for a matching
- * customer id.
+ * Customer is a concrete class containing data and methods related to a 
+ * customer in a retail system for the MKK-DiscountStrategy Project.
+ * A DataRetrievalStrategy is also used for obtaining the customer data from the
+ * product database.
  * 
  * @author Mary King, mking@my.wctc.edu
  * @version 1.0
@@ -16,17 +16,46 @@ public class Customer {
     private double acctBalance = 0.0;
     private DataRetrievalStrategy dataStrategy = new CustomerFakeDatabaseRetrieval();
 
+    /**
+     * Constructor instantiates the class using the customer id and customer name.
+     * 
+     * @param customerId  the customer id, a unique string identifying the 
+     *                    customer, not null, not empty
+     * @param customerName  the first and last name of the customer, 
+     *                      not null, not empty
+     */
     public Customer(String customerId, String customerName) {
         setCustomerId(customerId);
         setCustomerName(customerName);
     }
 
+    /**
+     * Constructor instantiates the class using the customer id, customer name,
+     * and account balance.
+     * 
+     * @param customerId  the customer id, a unique string identifying the 
+     *                    customer, not null, not empty
+     * @param customerName  the first and last name of the customer, 
+     *                      not null, not empty
+     * @param acctBalance  the customer's account balance (not used at this
+     *                     point in the project). can be zero or less or more
+     */
     public Customer(String customerId, String customerName, double acctBalance) {
         setCustomerId(customerId);
         setCustomerName(customerName);
         setAcctBalance(acctBalance);
     }
 
+    /**
+     * Constructor instantiates the class using just the customer id.  The
+     * customer id is then used to look up the rest of the customer information
+     * in the customer database.
+     * 
+     * @param customerId  the customer id, a unique string identifying the 
+     *                    customer, not null, not empty
+     * @throws  NullPointerException if a Customer object is not returned when
+     *          looking up customer information
+     */
     public Customer(String customerId) {
         setCustomerId(customerId);
         Customer customer = getCustomerInfo(customerId);

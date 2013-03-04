@@ -57,6 +57,8 @@ public class Product {
      * @param productId  the product id, a unique string identifying the product.
      *                   not null, not empty
      * @param qty  the number of the item being purchased
+     * @throws  NullPointerException if a Product object is not returned when
+     *          looking up product information
      */
     public Product(String productId, int qty) {
         setProductId(productId);

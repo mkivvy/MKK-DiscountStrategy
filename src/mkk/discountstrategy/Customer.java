@@ -67,10 +67,20 @@ public class Customer {
         setAcctBalance(customer.acctBalance);
     }
 
+    /**
+     * Increments the balance in the customer's account.
+     * 
+     * @param amt  the amount the customer's account is to be debited 
+     */
     public final void debitAcct(double amt) {
         acctBalance += amt;
     }
 
+    /**
+     * Decrements the balance in the customer's account.
+     * 
+     * @param amt  the amount the customer's account is to be credited 
+     */
     public final void creditAcct(double amt) {
         acctBalance -= amt;
     }
@@ -78,9 +88,6 @@ public class Customer {
     private Customer getCustomerInfo(String custId) {
         //prodId does not need to be validated here because this is a private
         //method called only from the constructor which already validates it
-//        FakeCustomerDatabase db = new FakeCustomerDatabase();
-//        Customer customer = db.findCustomer(custId);
-//        return customer;
         //COOL!!! I am making use of the strategy pattern AND polymorphism!
         Object obj = dataStrategy.getData(custId);
         if (obj instanceof Customer) {

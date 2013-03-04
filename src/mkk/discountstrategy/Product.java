@@ -104,6 +104,8 @@ public class Product {
      * Calculates the discount amount for the quantity of the product being 
      * purchased using the product's unit cost and discount strategy
      * 
+     * @param unitCost  the cost of one unit of the item being purchased
+     * @param qty  the number of the item being purchased
      * @return  the dollar and cents calculated discount amount for the entire
      *          quantity of the product being purchased 
      */
@@ -112,12 +114,8 @@ public class Product {
     }
     
     private Product getProductInfo(String prodId) {
-        //this can have a data retrieval strategy
         //prodId does not need to be validated here because this is a private
         //method called only from the constructor which already validates it
-//        FakeProductDatabase db = new FakeProductDatabase();
-//        Product product = db.findProduct(prodId);
-//        Product product = dataStrategy.getProductInfo(prodId);
         //COOL!!! I am making use of the strategy pattern AND polymorphism!
         Object obj = dataStrategy.getData(prodId);
         if (obj instanceof Product) {

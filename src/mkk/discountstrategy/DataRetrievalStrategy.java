@@ -11,5 +11,11 @@ package mkk.discountstrategy;
  * @version 1.0
  */
 public interface DataRetrievalStrategy {
+    /**
+     * Gets an object of the type matching the key passed in.
+     * 
+     * @param key  the unique identifier for the data object to be used
+     * @return  an object of the type matching the key passed in
+     */
     public abstract Object getData(String key);
 }

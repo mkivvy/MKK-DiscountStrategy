@@ -11,6 +11,13 @@ package mkk.discountstrategy;
  */
 public interface DiscountStrategy {
 
+    /**
+     * Calculates the discount amount for the quantity of the product being 
+     * purchased using the product's unit cost and discount strategy
+     * 
+     * @param unitCost  the cost of one unit of the item being purchased
+     * @param qty  the number of the item being purchased
+     */
     public abstract double getDiscount(double unitCost, int qty);
     
 }

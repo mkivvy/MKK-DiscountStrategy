@@ -23,7 +23,8 @@ public class Product {
     private DiscountStrategy discStrategy;
     private int qty;
     private DataRetrievalStrategy dataStrategy 
-            = new ProductFakeDatabaseRetrieval();
+            = new ProductFakeMapRetrieval();
+//            = new ProductFakeDatabaseRetrieval();
 
     /**
      * Constructor instantiates the class setting the product id value, product 

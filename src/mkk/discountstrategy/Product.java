@@ -23,7 +23,7 @@ public class Product {
     private DiscountStrategy discStrategy;
     private int qty;
     private DataRetrievalStrategy dataStrategy 
-            = new ProductFakeMapRetrieval();
+            = new ProductMapRetrieval();
 //            = new ProductFakeDatabaseRetrieval();
 
     /**

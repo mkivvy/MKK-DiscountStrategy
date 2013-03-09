@@ -4,7 +4,7 @@ package mkk.discountstrategy;
  *
  * @author Mary
  */
-public class ProductFakeMapRetrieval implements DataRetrievalStrategy {
+public class ProductMapRetrieval implements DataRetrievalStrategy {
 
     @Override
     public Object getData(String productId) {
@@ -14,8 +14,8 @@ public class ProductFakeMapRetrieval implements DataRetrievalStrategy {
             throw new IllegalArgumentException();
         }
         
-        FakeProductMap map = new FakeProductMap();
-        Product product = map.findProduct(productId);
+        ProductMap fpm = new ProductMap();
+        Product product = fpm.findProduct(productId);
         return product;
     }
 }

@@ -3,7 +3,7 @@ package mkk.discountstrategy;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FakeProductMap {
+public class ProductMap {
 
     private Product[] products = {
         new Product("A1234", "Black T-shirt   ", 5.00, new NoDiscount()),
@@ -17,18 +17,16 @@ public class FakeProductMap {
         new Product("I9012", "Gold hoop earrings", 12.00, new QtyPercentageDiscount(3)),
         new Product("J0123", "Silver hoop earrings", 10.00, new QtyPercentageDiscount(2))
     };
-
     private Map<String, Product> productMap = new HashMap<String, Product>();
 
-    public FakeProductMap() {
+    public ProductMap() {
         //populate the map with the array
         for (Product p : products) {
             productMap.put(p.getProductId(), p);
         }
     }
-    
-        public final Product findProduct(String prodId){
-            return productMap.get(prodId);
-        }
 
+    public final Product findProduct(String prodId) {
+        return productMap.get(prodId);
+    }
 }

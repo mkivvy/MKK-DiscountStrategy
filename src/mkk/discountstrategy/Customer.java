@@ -14,7 +14,8 @@ public class Customer {
     private String customerId;
     private String customerName;
     private double acctBalance = 0.0;
-    private DataRetrievalStrategy dataStrategy = new CustomerFakeDatabaseRetrieval();
+//    private DataRetrievalStrategy dataStrategy = new CustomerFakeDatabaseRetrieval();
+    private DataRetrievalStrategy dataStrategy = new CustomeMapRetrieval();
 
     /**
      * Constructor instantiates the class using the customer id and customer name.
